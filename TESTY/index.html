@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dodaj użytkownika</title>
+</head>
+<body>
+  <h1>Dodaj użytkownika</h1>
+  <form action="http://192.168.131.146:8081/addUser" method="post">
+    <label for="name">Imię:</label>
+    <input type="text" id="name" name="name" required><br>
+    
+    <label for="password">Hasło:</label>
+    <input type="password" id="password" name="password" required><br>
+    
+    <label for="profession">Zawód:</label>
+    <input type="text" id="profession" name="profession" required><br>
+    
+    <input type="submit" value="Dodaj użytkownika">
+  </form>
+</body>
+</html>
