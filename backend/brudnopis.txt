@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 z dedykacją odemła
+=======
+
+Hejoooooo
+>>>>>>> 16eb27aef0b8fd36f13bfb9dff625556b4055798
