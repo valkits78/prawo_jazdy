@@ -1,0 +1,3 @@
+server.js
+	-pokazanie danych user.json 
+	-żeby uruchomić program na innym sprzęcie wystarczy sprawdzić ip komputera z 	serwerem i wpisać ip:8081/listUsers
