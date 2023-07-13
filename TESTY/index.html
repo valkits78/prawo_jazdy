@@ -17,5 +17,16 @@
     
     <input type="submit" value="Dodaj użytkownika">
   </form>
+
+  <script>
+    const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';  // CORS proxy service URL
+    const url = 'http://192.168.131.144:3000/listUsers';  // Target URL
+    
+    fetch(corsProxyUrl + url)
+      .then(res => res.text())
+      .then(text => console.log(text))
+      .catch(err => console.error(err));
+  </script>
+
 </body>
 </html>
