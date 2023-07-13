@@ -2,6 +2,13 @@
 <html>
 <head>
   <title>Dodaj użytkownika</title>
+	<style>
+	#user-list{
+	max-height:175px;
+	overflow: auto;
+	width:200px;
+	}
+	</style>
 </head>
 <body>
   <h1>Dodaj użytkownika</h1>
@@ -17,5 +24,50 @@
     
     <input type="submit" value="Dodaj użytkownika">
   </form>
+
+  <h1>Aktualna lista użytkowników:</h1>
+  <ul id="user-list"></ul>
+<script>
+    function fetchUserList() {
+      fetch('/listUsers')
+        .then(response => response.json())
+        .then(data => {
+          const userListElement = document.getElementById('user-list');
+          userListElement.innerHTML = Object.values(data).map(user => `<li>${user.name} (${user.profession})</li>`).join('');
+        });
+    }
+
+    fetchUserList();
+
+    document.getElementById('add-user-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          const userListElement = document.getElementById('user-list');
+          const newUserElement = document.createElement('li');
+          newUserElement.textContent = `${data.user.name} (${data.user.profession})`;
+          userListElement.appendChild(newUserElement);
+          form.reset();
+        } else {
+          console.error(data.error);
+        }
+      })
+      .catch(error => {
+        console.error('An error occurred:', error);
+      })
+      .finally(() => {
+        fetchUserList();
+      });
+    });
+  </script>
+
 </body>
 </html>
