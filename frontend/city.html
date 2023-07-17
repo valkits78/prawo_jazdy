@@ -36,6 +36,14 @@
         backDiv.onclick = function() {
             window.location.href = 'login.html';
         };
+        var zoomInButton = document.getElementById("zoomIn");
+        zoomInButton.onclick = function() {
+            document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) + 0.1;
+        };
+        var zoomOutButton = document.getElementById("zoomOut");
+        zoomOutButton.onclick = function() {
+            document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) - 0.1;
+        };
 
         var kioskDiv = document.getElementById("kiosk");
         kioskDiv.onclick = function() {
@@ -49,7 +57,7 @@
         garageDiv.onclick = function() {
             window.location.href = 'garage.html';
         };
-        var naukakDiv = document.getElementById("nauka");
+        var naukaDiv = document.getElementById("nauka");
         naukaDiv.onclick = function() {
             window.location.href = 'nauka.html';
         };
@@ -58,7 +66,7 @@
             window.location.href = 'biblioteka.html';
         };
         var salonDiv = document.getElementById("salon");
-        salonkDiv.onclick = function() {
+        salonDiv.onclick = function() {
             window.location.href = 'salon.html';
         };
     </script>
