@@ -1,3 +1,5 @@
+
+
 :root {
     --primary-color: #fff1e8;
     --border: black;
@@ -8,7 +10,7 @@
 body {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background-image: url("jj.jpg");
+    background-image: url("./assets/bckg.jpg");
     background-repeat: repeat;
     background-size: auto;
 }
@@ -82,10 +84,6 @@ h1 {
 }
 
 
-
-
-
-
 .gif {
     width: 475px;
     height: 320px;
@@ -122,7 +120,6 @@ h1 {
 #money {
     width: 86px;
     height: 729px;
-    background-color:  black;
     float: left;
     padding-left: 4px;
     padding-top:  4px;
@@ -131,14 +128,13 @@ h1 {
 #screen {
     width: 1296px;
     height: 729px;
-    background-color:  var(--border);
+    background-color: white;
     float: left;
 }
 
 #settings{
     width: 50px;
     height: 729px;
-    background-color:  var(--border);
     float: left;
 
 }
@@ -146,14 +142,13 @@ h1 {
 #moneyValue {
     width: 90px;
     height: 100px;
-    background-color:pink;
 }
 
 #mon {
     width: 90px;
     height: 50px;
     float: left;
-    background-color:red;
+    background-image: url("./assets/menu/money.png");
 }
 
 #val {
@@ -165,9 +160,21 @@ h1 {
 .settingsButton {
     width: 46px;
     height: 46px;
-    background-color:red;
     float: left;
     margin: 2px;
+}
+
+#back{
+    background-image: url("./assets/menu/out.png");
+}
+#zoomIn{
+    background-image: url("./assets/menu/plus.png");
+}
+#zoomOut{
+    background-image: url("./assets/menu/minus.png");
+}
+#music{
+    background-image: url("./assets/menu/nuta.png");
 }
 
 #volume{
@@ -177,6 +184,5 @@ h1 {
     padding-left: 2px;
     padding-right: 2px;
     padding-bottom: 27px;
-    background-color:red;
     float: left;
 }
