@@ -7,7 +7,6 @@
     --button-color: rgb(41,173,255);
 }
 
-
 body {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
@@ -16,7 +15,7 @@ body {
     background-size: auto;
 }
 .body {
-    width:1366px;
+    width:1436px;
     height: 737px;
     margin: 0 auto;
 }
@@ -84,6 +83,11 @@ h1 {
     color: black;
 }
 
+
+
+
+
+
 .gif {
     width: 475px;
     height: 320px;
@@ -95,6 +99,7 @@ h1 {
     align-items: center;
     background-color: #1d2b53;
     position: relative;
+
 }
 
 .gif img {
@@ -103,10 +108,77 @@ h1 {
     border-radius: 70%;
     text-align: center;
     transform: scale(1.2);
+    z-index: 1;
 }
 
 .name {
     position: absolute;
     text-align: center;
+    top: 10px;
     color: white;
+    z-index: 2;
+    font-size: 25px;
+}
+
+
+#money {
+    width: 86px;
+    height: 729px;
+    background-color:  black;
+    float: left;
+    padding-left: 4px;
+    padding-top:  4px;
+}
+
+#screen {
+    width: 1296px;
+    height: 729px;
+    background-color:  var(--border);
+    float: left;
+}
+
+#settings{
+    width: 50px;
+    height: 729px;
+    background-color:  var(--border);
+    float: left;
+
+}
+
+#moneyValue {
+    width: 90px;
+    height: 100px;
+    background-color:pink;
+}
+
+#mon {
+    width: 90px;
+    height: 50px;
+    float: left;
+    background-color:red;
+}
+
+#val {
+    width: 90px;
+    height: 50px;
+    float: left;
+}
+
+.settingsButton {
+    width: 46px;
+    height: 46px;
+    background-color:red;
+    float: left;
+    margin: 2px;
+}
+
+#volume{
+    width: 42px;
+    height: 400px;
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-bottom: 27px;
+    background-color:red;
+    float: left;
 }
