@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #square {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: red;
+    }
+    #square2 {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: blue;
+    }
+    #square3 {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <div id="square2"></div>
+  <div id="square"></div>
+  <div id="square3"></div>
+
+  <script>
+    const points = [
+      {x: 700, y: 200},
+      {x: 1200, y: 500}
+    ];
+    let currentPoint = 0;
+    let angle = 0;
+    let radius = 100;
+    let initialSquareX = 0;
+    let initialSquareY = 0;
+    let isAnimationStopped = false;
+    let isMovingToNextPoint = false;
+    let oldX = 0;
+    let oldY = 0;
+    let firstTime = true; // Zmienna flagowa oznaczająca pierwsze uruchomienie
+
+    const square = document.getElementById('square');
+    const square2 = document.getElementById('square2');
+    const square3 = document.getElementById('square3');
+
+    function moveSquareOnCircle() {
+      if (isAnimationStopped) {
+        return;
+      }
+
+      if (!firstTime) { // Sprawdzenie, czy to pierwsze uruchomienie
+        const centerX = points[currentPoint].x;
+        const centerY = points[currentPoint].y;
+
+        const squareX = centerX + Math.cos(angle) * radius - square.offsetWidth / 2;
+        const squareY = centerY + Math.sin(angle) * radius - square.offsetHeight / 2;
+
+        square.style.left = squareX + 'px';
+        square.style.top = squareY + 'px';
+
+        angle += 2 * (Math.PI / 180);
+      } else {
+        firstTime = false; // Zmiana flagi po pierwszym uruchomieniu
+      }
+
+      // Aktualizacja pozycji zielonego kwadratu
+      square3.style.left = points[currentPoint].x - square3.offsetWidth / 2 + 'px';
+      square3.style.top = points[currentPoint].y - square3.offsetHeight / 2 + 'px';
+
+      if (isMovingToNextPoint) {
+        const distance = calculateDistance(square, points[currentPoint]);
+        if (distance <= 1) {
+          isMovingToNextPoint = false;
+          isAnimationStopped = true;
+          const targetX = parseInt(square2.style.left) + square2.offsetWidth / 2;
+          const targetY = parseInt(square2.style.top) + square2.offsetHeight / 2;
+          moveSquare(targetX, targetY);
+          square.style.left = oldX + 'px'; // Przywracanie poprzedniej pozycji X
+          square.style.top = oldY + 'px'; // Przywracanie poprzedniej pozycji Y
+        }
+      }
+
+      requestAnimationFrame(moveSquareOnCircle);
+    }
+
+    function moveSquare2OnCircle() {
+      if (isAnimationStopped) {
+        return;
+      }
+
+      const centerX = points[currentPoint].x;
+      const centerY = points[currentPoint].y;
+      const radius2 = 150;
+
+      const square2X = centerX + Math.cos(angle) * radius2 - square2.offsetWidth / 2;
+      const square2Y = centerY + Math.sin(angle) * radius2 - square2.offsetHeight / 2;
+
+      square2.style.left = square2X + 'px';
+      square2.style.top = square2Y + 'px';
+
+      angle += 0.2 * (Math.PI / 180);
+
+      requestAnimationFrame(moveSquare2OnCircle);
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === ' ' || event.key === 'Spacebar') {
+        if (isAnimationStopped) {
+          oldX = square.style.left; // Zapisywanie aktualnej pozycji X
+          oldY = square.style.top; // Zapisywanie aktualnej pozycji Y
+          firstTime = true; // Resetowanie flagi przy zmianie punktu obrotu
+          currentPoint = (currentPoint + 1) % points.length;
+          radius = calculateDistance(square, points[currentPoint]);
+          isAnimationStopped = false;
+          isMovingToNextPoint = true;
+          moveSquareOnCircle();
+          moveSquare2OnCircle();
+        } else {
+          isAnimationStopped = true;
+          const targetX = parseInt(square2.style.left) + square2.offsetWidth / 2;
+          const targetY = parseInt(square2.style.top) + square2.offsetHeight / 2;
+          initialSquareX = parseInt(square.style.left) + square.offsetWidth / 2;
+          initialSquareY = parseInt(square.style.top) + square.offsetHeight / 2;
+          moveSquare(targetX, targetY, initialSquareX, initialSquareY);
+        }
+      }
+    });
+
+    function moveSquare(targetX, targetY, startX, startY) {
+      let squareX = startX;
+      let squareY = startY;
+      const deltaX = targetX - squareX;
+      const deltaY = targetY - squareY;
+      const angle = Math.atan2(deltaY, deltaX);
+      const speed = 5;
+      const velocityX = Math.cos(angle) * speed;
+      const velocityY = Math.sin(angle) * speed;
+
+      function animate() {
+        squareX += velocityX;
+        squareY += velocityY;
+
+        square.style.left = squareX - square.offsetWidth / 2 + 'px';
+        square.style.top = squareY - square.offsetHeight / 2 + 'px';
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    function calculateDistance(element, point) {
+      const centerX = point.x;
+      const centerY = point.y;
+      const squareX = parseInt(element.style.left) + element.offsetWidth / 2;
+      const squareY = parseInt(element.style.top) + element.offsetHeight / 2;
+      return Math.sqrt((centerX - squareX) ** 2 + (centerY - squareY) ** 2);
+    }
+
+    moveSquareOnCircle();
+    moveSquare2OnCircle();
+  </script>
+</body>
+</html>
