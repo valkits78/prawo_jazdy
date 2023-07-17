@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball</title>
+    <style>
+        #canvasContainer {
+            position: relative;
+            width: 1200px;
+            height: 900px;
+            overflow: hidden;
+            border: 1px solid black;
+        }
+
+        #canvasContainer canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulacja Piłki</h1>
+    <label for="force">Siła:</label>
+    <input type="number" id="force" />
+
+    <button onclick="startSimulation()">Start</button>
+
+    <div id="canvasContainer">
+        <canvas id="backgroundCanvas" width="1200px" height="900px"></canvas>
+        <canvas id="ballCanvas" width="1200px" height="900px"></canvas>
+    </div>
+
+    <script>
+        function startSimulation() {
+            
+        // Pobierz elementy canvas
+        var backgroundCanvas = document.getElementById("backgroundCanvas");
+        var backgroundCtx = backgroundCanvas.getContext("2d");
+        var ballCanvas = document.getElementById("ballCanvas");
+        var ballCtx = ballCanvas.getContext("2d");
+
+        // Utwórz obiekt obrazu
+        var backgroundImg = new Image();
+        backgroundImg.src = "bckg.jpg";
+
+        var force = parseInt(document.getElementById("force").value);
+        var angle = 13;
+
+        var meterRatio = 100; // Stosunek pikseli do metrów
+        var distance = 0; // Aktualna odległość w metrach
+
+        var ball = {
+            x: 50,
+            y: ballCanvas.height - 50,
+            radius: 40,
+            vx: (force / 10) * Math.cos(angle),
+            vy: (force / 10) * Math.sin(angle),
+            gravity: 0.2,
+            bounceFactor: 0.8,
+            rotation: 0, // Dodaj nową właściwość
+        };
+
+        var ballImg = new Image();
+        ballImg.src = "baba.gif";
+
+        function drawBackground() {
+            backgroundCtx.clearRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+            backgroundCtx.drawImage(backgroundImg, backgroundX, backgroundY);
+        }
+
+        // Ustaw początkowe pozycje tła
+        var backgroundX = 0;
+        var backgroundY = 0;
+
+        function animate() {
+            // Wyczyść obszar canvas dla piłki
+            ballCtx.clearRect(0, 0, ballCanvas.width, ballCanvas.height);
+
+            // Narysuj tło na aktualnej pozycji
+            drawBackground();
+
+            // Sprawdź, czy tło przesunęło się wystarczająco daleko do lewej
+            if (backgroundX <= -backgroundImg.width / 2) {
+                // Jeśli tak, przesuń tło z powrotem na początek
+                backgroundX = 0;
+            }
+
+            ball.vy += ball.gravity;
+
+            if(ball.x < ballCanvas.width/2 || ball.vx < 5) ball.x += ball.vx;
+            else backgroundX -= ball.vx;
+
+            ball.y += ball.vy;
+
+            if (ball.y + ball.radius > ballCanvas.height) {
+                ball.y = ballCanvas.height - ball.radius;
+                ball.vy *= -ball.bounceFactor;
+                ball.vx *= 0.75;
+                ball.rotation = 10; // Przywróć początkową rotację po odbiciu
+            }
+            if (ball.y - ball.radius < 0) {
+                ball.y = ball.radius;
+                ball.vy *= -ball.bounceFactor;
+                ball.rotation = 10; // Przywróć początkową rotację po odbiciu
+            }
+
+            // Rysuj piłkę (plik GIF)
+            ballCtx.save();
+            ballCtx.translate(ball.x, ball.y);
+            ballCtx.rotate(ball.rotation * Math.PI / 180); // Przekształć stopnie na radiany
+            ballCtx.drawImage(ballImg, -ball.radius, -ball.radius, ball.radius * 2, ball.radius * 2);
+            ballCtx.restore();
+
+            // Aktualizuj licznik metrów
+            distance += Math.abs(ball.vx) / meterRatio;
+
+            // Rysuj licznik metrów
+            ballCtx.fillStyle = "white";
+            ballCtx.font = "20px Arial";
+            ballCtx.fillText(distance.toFixed(2) + " m", 10, 30);
+
+            // Aktualizuj rotację piłki
+            ball.rotation += Math.abs(ball.vx) * 0.1; // Przeskaluj wartość rotacji, aby uzyskać odpowiedni kąt
+            ball.rotation *= 0.95; // Zwolnij rotację po każdym odbiciu
+
+            // Powtórz animację
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+    }
+    </script>
+</body>
+</html>
