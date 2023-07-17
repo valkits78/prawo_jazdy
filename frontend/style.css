@@ -180,9 +180,6 @@ h1 {
 #volume{
     width: 42px;
     height: 400px;
-    padding-top: 2px;
-    padding-left: 2px;
-    padding-right: 2px;
-    padding-bottom: 27px;
+    padding: 2px 2px 27px 2px;
     float: left;
 }
