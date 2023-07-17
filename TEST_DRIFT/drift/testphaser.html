@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Przykładowa gra z Phaserem</title>
+    <style>
+        body { margin: 0; }
+    </style>
+</head>
+<body>
+    <script src="node_modules/phaser/dist/phaser.min.js"></script>
+    <script>
+        // Inicjalizacja gry po załadowaniu strony
+        window.onload = function() {
+            var config = {
+                type: Phaser.AUTO,
+                width: 1296,
+                height: 729,
+                scene: {
+                    preload: preload,
+                    create: create,
+                    update: update
+                }
+            };
+
+            var game = new Phaser.Game(config);
+            var player;
+            var cursors;
+            var orbitPoint;
+            var orbitRadius = 50;
+            var orbitSpeed = 0.05;
+            var orbiting = false;
+            var leftKeyDown = false;
+            var rightKeyDown = false;
+            var background;
+			
+            function preload() {
+                this.load.image('background', '1st_street.png');
+                this.load.image('player', 'car.png');
+                this.load.image('point', 'point.png');
+            }
+
+            function create() {
+                background = this.add.image(0, 0, 'background').setOrigin(0);
+                player = this.add.image(110, 666, 'player');
+                player.setScale(0.15);
+
+                cursors = this.input.keyboard.createCursorKeys();
+
+                // Inicjalizacja zmiennych stanu klawiszy
+                leftKeyDown = false;
+                rightKeyDown = false;
+            }
+
+            function update() {
+                if (cursors.left.isDown && !orbiting && !leftKeyDown) {
+                    var offsetX = Math.sin(player.rotation) * orbitRadius;
+                    var offsetY = -Math.cos(player.rotation) * orbitRadius;
+                    orbitPoint = this.add.image(player.x + offsetX, player.y + offsetY , 'point');
+                    orbitPoint.setScale(0.5);
+                    orbitPoint.setAlpha(0);
+                    orbiting = true;
+                    leftKeyDown = true;
+                }
+
+                if (cursors.right.isDown && !orbiting && !rightKeyDown) {
+                    var offsetX = Math.sin(player.rotation) * orbitRadius;
+                    var offsetY = -Math.cos(player.rotation) * orbitRadius;
+                    orbitPoint = this.add.image(player.x + offsetX, player.y + offsetY , 'point');
+                    orbitPoint.setScale(0.5);
+                    orbitPoint.setAlpha(0);
+                    orbiting = true;
+                    rightKeyDown = true;
+                }
+
+                if (cursors.left.isUp) {
+                    leftKeyDown = false;
+                }
+
+                if (cursors.right.isUp) {
+                    rightKeyDown = false;
+                }
+
+                if (cursors.left.isUp && cursors.right.isUp) {
+                    if (orbitPoint) {
+                        orbitPoint.destroy();
+                    }
+                    orbiting = false;
+                }
+
+                if (cursors.left.isDown && orbiting) {
+                    playerOrbit(orbitPoint, true);
+                    player.rotation += 0.05;
+					
+                }
+
+                if (cursors.right.isDown && orbiting) {
+                    playerOrbit(orbitPoint, false);
+                    player.rotation -= 0.05;
+                }
+
+                if (!cursors.left.isDown && !cursors.right.isDown) {
+                    player.x += Math.sin(player.rotation) * 3;
+                    player.y -= Math.cos(player.rotation) * 3;
+                }
+				
+                if (cursors.left.isDown && cursors.right.isDown) {
+                    player.x += Math.sin(player.rotation) * 3;
+                    player.y -= Math.cos(player.rotation) * 3;
+                }
+				
+            }
+
+            function playerOrbit(point, clockwise) {
+                var angle = Phaser.Math.Angle.Between(point.x, point.y, player.x, player.y);
+                angle += (clockwise ? 1 : -1) * orbitSpeed;
+                var offsetX = orbitRadius * Math.cos(angle);
+                var offsetY = orbitRadius * Math.sin(angle);
+                player.x = point.x + offsetX;
+                player.y = point.y + offsetY;
+            }
+        };
+    </script>
+</body>
+</html>
