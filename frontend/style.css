@@ -1,4 +1,4 @@
-
+/* register.html, login.html  */
 
 :root {
     --primary-color: #fff1e8;
@@ -19,6 +19,7 @@ body {
     width:1436px;
     height: 737px;
     margin: 0 auto;
+
 }
 
 .container {
@@ -118,6 +119,8 @@ h1 {
 }
 
 
+/*  city.html */
+
 #money {
     width: 86px;
     height: 729px;
@@ -129,8 +132,9 @@ h1 {
 #screen {
     width: 1296px;
     height: 729px;
-    background-color: white;
+    background-image: url("./assets/city/menu1.png");
     float: left;
+    background-size: cover;
 }
 
 #settings{
@@ -166,21 +170,134 @@ h1 {
 }
 
 #back{
-    background-image: url("./assets/menu/out.png");
-}
-#zoomIn{
-    background-image: url("./assets/menu/plus.png");
-}
-#zoomOut{
-    background-image: url("./assets/menu/minus.png");
-}
-#music{
-    background-image: url("./assets/menu/nuta.png");
+    background-image: url("./assets/menu/logout1.png");
+    background-size: cover;
 }
 
-#volume{
+#back:hover {
+    background-image: url("./assets/menu/logout.png");
+    background-size: cover;
+}
+
+#zoomIn{
+    background-image: url("./assets/menu/plus1.png");
+    background-size: cover;
+}
+
+#zoomIn:hover{
+    background-image: url("./assets/menu/plus.png");
+    background-size: cover;
+}
+
+#zoomOut{
+    background-image: url("./assets/menu/minus1.png");
+    background-size: cover;
+}
+
+#zoomOut:hover{
+    background-image: url("./assets/menu/minus.png");
+    background-size: cover;
+}
+
+#music{
+    background-image: url("./assets/menu/nutka1.png");
+    background-size: cover;
+}
+
+#music:hover{
+    background-image: url("./assets/menu/nutka.png");
+    background-size: cover;
+}
+
+/*  suwak */
+
+#volume {
     width: 42px;
     height: 400px;
     padding: 2px 2px 27px 2px;
     float: left;
+    position: relative;
+    overflow-y: scroll;
+}
+
+#kiosk {
+    background-image: url("./assets/city/zaba.png");
+    width: 150px;
+    height: 443px;
+    float: left;
+    background-size: cover;
+    margin-top: 113px;
+
+}
+
+#kiosk:hover {
+    background-color: yellow;
+    transform: scale(1.01);
+    transition: 0.7s;
+}
+
+#race {
+    background-image: url("./assets/city/tormenu.png");
+    float: left;
+    width: 160px;
+    height: 150px;
+    background-size: cover;
+    margin-top: 406px;
+}
+
+#race:hover {
+    background-color: yellow;
+
+}
+
+#garage {
+    background-image: url("./assets/city/garaz.png");
+    float: left;
+    width: 166px;
+    height: 149px;
+    background-size: cover;
+    margin-top: 407px;
+}
+
+#garage:hover {
+    background-color: yellow;
+}
+
+#nauka {
+    background-image: url("./assets/city/szkoła.png");
+    float: left;
+    width: 250px;
+    height: 405px;
+    background-size: cover;
+    margin: 151px 10px 0 0;
+}
+
+#nauka:hover {
+    background-color: yellow;
+}
+
+#biblioteka {
+    background-image: url("./assets/city/biblio.png");
+    float: left;
+    width: 300px;
+    height: 405px;
+    background-size: cover;
+    margin-top: 151px;
+}
+
+#biblioteka:hover {
+    background-color: yellow;
+}
+
+#salon {
+    background-image: url("./assets/city/salon.png");
+    float: left;
+    width: 260px;
+    height: 350px;
+    background-size: cover;
+    margin-top: 206px;
+}
+
+#salon:hover {
+    background-color: yellow;
 }
