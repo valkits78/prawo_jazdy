@@ -132,9 +132,8 @@ h1 {
 #screen {
     width: 1296px;
     height: 729px;
-    background-image: url("./assets/city/menu1.png");
     float: left;
-    background-size: cover;
+    background-color: white;
 }
 
 #settings{
@@ -300,4 +299,71 @@ h1 {
 
 #salon:hover {
     background-color: yellow;
+}
+
+
+/* biblioteka.html */
+
+#book {
+    width: 1296px;
+    height: 729px;
+    float: left;
+    background-color: red;
+    display:none;
+}
+
+#ostrzegawcze {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: lime;
+}
+
+#zakazu {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: aqua;
+}
+
+#nakazu {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: blue;
+}
+
+#informacyjne {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: bisque;
+}
+
+#uzupelniajace {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: blueviolet;
+}
+
+#poziome {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: burlywood;
+}
+
+#swietlne {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: coral;
+}
+
+#kodeks {
+    width: 162px;
+    height: 729px;
+    float:left;
+    background-color: greenyellow;
 }
