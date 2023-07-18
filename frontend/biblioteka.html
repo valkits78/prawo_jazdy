@@ -24,7 +24,16 @@
             <div class="bookbutton", id="swietlne"></div>
             <div class="bookbutton", id="kodeks"></div>
         </div>
-        <div id="book"></div>
+        <div id="book">
+            <div id="leftArrow"></div>
+            <div id="info">
+                <div id="photoInfo"></div>
+                <div id="titleInfo"></div>
+                <div id="aboutInfo"></div>
+                <div id="back"></div>
+            </div>
+            <div id="rightArrow"></div>
+        </div>
         <div id="settings">
             <div class="settingsButton" id="back"></div>
             <div class="settingsButton" id="zoomIn"></div>
@@ -56,6 +65,13 @@
                 document.getElementById("screen").style.display = "none";
             };
         }
+        var back = document.getElementById("back");
+        back.onclick = function(){
+            book.style.display = "none";
+            document.getElementById("screen").style.display = "block";
+
+        }
+
     </script>
 </body>
 </html>
