@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witaj</title>
+</head>
+<body>
+    <h1>Witaj!</h1>
+    <p id="loginStatusMessage"></p>
+    <button id="logoutButton">Wyloguj</button>
+
+    <script>
+        var loginStatusMessage = document.getElementById("loginStatusMessage");
+        var logoutButton = document.getElementById("logoutButton");
+
+        // Funkcja do pobierania wartości z pliku cookie
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Sprawdzenie stanu logowania po odświeżeniu strony
+        var loginStatus = getCookie("loginStatus");
+        if (loginStatus === "loggedIn") {
+            loginStatusMessage.textContent = "Jesteś zalogowany.";
+        } else {
+            loginStatusMessage.textContent = "Nie jesteś zalogowany.";
+            logoutButton.style.display = "none"; // Ukrycie przycisku "Wyloguj"
+        }
+
+        logoutButton.addEventListener("click", function() {
+            // Po kliknięciu przycisku "Wyloguj" usuń plik cookie i przekieruj użytkownika na stronę logowania
+            document.cookie = "loginStatus=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>

@@ -25,5 +25,20 @@
             <div class="settingsButton" id="volume"></div>
         </div>
     </div>
+
+    <script>
+        var backDiv = document.getElementById("back");
+        backDiv.onclick = function() {
+            window.location.href = 'login.html';
+        };
+        var zoomInButton = document.getElementById("zoomIn");
+        zoomInButton.onclick = function() {
+            document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) + 0.1;
+        };
+        var zoomOutButton = document.getElementById("zoomOut");
+        zoomOutButton.onclick = function() {
+            document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) - 0.1;
+        };
+    </script>
 </body>
 </html>
