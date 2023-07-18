@@ -15,14 +15,14 @@
             </div>
         </div>
         <div id="screen">
-            <div id="ostrzegawcze"></div>
-            <div id="zakazu"></div>
-            <div id="nakazu"></div>
-            <div id="informacyjne"></div>
-            <div id="uzupelniajace"></div>
-            <div id="poziome"></div>
-            <div id="swietlne"></div>
-            <div id="kodeks"></div>
+            <div class="bookbutton", id="ostrzegawcze"></div>
+            <div class="bookbutton", id="zakazu"></div>
+            <div class="bookbutton", id="nakazu"></div>
+            <div class="bookbutton", id="informacyjne"></div>
+            <div class="bookbutton", id="uzupelniajace"></div>
+            <div class="bookbutton", id="poziome"></div>
+            <div class="bookbutton", id="swietlne"></div>
+            <div class="bookbutton", id="kodeks"></div>
         </div>
         <div id="book"></div>
         <div id="settings">
@@ -48,11 +48,12 @@
             document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) - 0.1;
         };
 
-        var bookButton = document.getElementById("book");
-        var settingsButtons = document.getElementsByClassName("settingsButton");
-        for (var i = 0; i < settingsButtons.length; i++) {
-            settingsButtons[i].onclick = function() {
-                bookButton.innerText = "Wielkość book: " + bookButton.offsetWidth + "x" + bookButton.offsetHeight;
+        var book = document.getElementById("book");
+        var bookbuttons = document.getElementsByClassName("bookbutton");
+        for (var i = 0; i < bookbuttons.length; i++) {
+            bookbuttons[i].onclick = function() {
+                book.style.display = "block";
+                document.getElementById("screen").style.display = "none";
             };
         }
     </script>
