@@ -153,6 +153,8 @@ h1 {
     height: 50px;
     float: left;
     background-image: url("./assets/menu/money.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #val {
