@@ -30,7 +30,7 @@
                 <div id="photoInfo"></div>
                 <div id="titleInfo"></div>
                 <div id="aboutInfo"></div>
-                <div id="back"></div>
+                <div id="backToScreen"></div>
             </div>
             <div id="rightArrow"></div>
         </div>
@@ -46,7 +46,7 @@
     <script>
         var backDiv = document.getElementById("back");
         backDiv.onclick = function() {
-            window.location.href = 'login.html';
+            window.location.href = 'city.html';
         };
         var zoomInButton = document.getElementById("zoomIn");
         zoomInButton.onclick = function() {
@@ -65,8 +65,8 @@
                 document.getElementById("screen").style.display = "none";
             };
         }
-        var back = document.getElementById("back");
-        back.onclick = function(){
+        var backToScreen = document.getElementById("backToScreen");
+        backToScreen.onclick = function(){
             book.style.display = "none";
             document.getElementById("screen").style.display = "block";
 
