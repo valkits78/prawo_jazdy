@@ -304,6 +304,45 @@ h1 {
 
 /* biblioteka.html */
 
+#ostrzegawcze {
+    background-color: lime;
+}
+
+#zakazu {
+    background-color: aqua;
+}
+
+#nakazu {
+    background-color: blue;
+}
+
+#informacyjne {
+    background-color: bisque;
+}
+
+#uzupelniajace {
+    background-color: blueviolet;
+}
+
+#poziome {
+    background-color: burlywood;
+}
+
+#swietlne {
+    background-color: coral;
+}
+
+#kodeks {
+    background-color: greenyellow;
+}
+
+.bookbutton{
+    width: 162px;
+    height: 725px;
+    border-radius: 20px;
+    float:left;
+}
+
 #book {
     width: 1296px;
     height: 729px;
@@ -312,58 +351,57 @@ h1 {
     display:none;
 }
 
-#ostrzegawcze {
-    width: 162px;
+
+#leftArrow{
+    width: 150px;
     height: 729px;
-    float:left;
-    background-color: lime;
+    float: left;
+    background-color: black;
 }
 
-#zakazu {
-    width: 162px;
+#info {
+    width: 996px;
+    height: 619px;
+    float: left;
+    background-color: blue;
+    margin: 30px 0 80px 0;
+}
+
+#rightArrow {
+    width: 150px;
     height: 729px;
+    float: left;
+    background-color: black;
+}
+
+#photoInfo {
+    width: 300px;
+    height: 250px;
     float:left;
     background-color: aqua;
+    margin: 50px 0 0 50px;
 }
 
-#nakazu {
-    width: 162px;
-    height: 729px;
-    float:left;
-    background-color: blue;
-}
-
-#informacyjne {
-    width: 162px;
-    height: 729px;
-    float:left;
-    background-color: bisque;
-}
-
-#uzupelniajace {
-    width: 162px;
-    height: 729px;
+#titleInfo {
+    width: 500px;
+    height: 200px;
     float:left;
     background-color: blueviolet;
+    margin: 70px 73px 30px 73px;
 }
 
-#poziome {
-    width: 162px;
-    height: 729px;
+#aboutInfo {
     float:left;
-    background-color: burlywood;
+    width: 896px;
+    height: 229px;
+    margin: 50px;
+    background-color: chartreuse;
 }
 
-#swietlne {
-    width: 162px;
-    height: 729px;
+#backToScreen {
+    width: 80px;
+    height: 50px;
+    background-color: darkorange;
     float:left;
-    background-color: coral;
-}
-
-#kodeks {
-    width: 162px;
-    height: 729px;
-    float:left;
-    background-color: greenyellow;
+    margin: 5px 458px 25px 458px ;
 }
