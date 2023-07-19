@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wybierz nazwę</title>
+  <style>
+    .sign-image {
+      max-width: 200px;
+      max-height: 200px;
+    }
+    .sign-category {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    #score {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      font-weight: bold;
+    }
+    #summary {
+      display: none;
+      text-align: center;
+    }
+    #summary p {
+      margin-bottom: 10px;
+    }
+    #summary button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="game">
+    <h1> W znak do opisu:</h1>
+    <div id="description"></div>
+    <div id="names"></div>
+    <div id="score"></div>
+  </div>
+  <div id="summary">
+    <h2>Podsumowanie</h2>
+    <p id="summaryTotalQuestions"></p>
+    <p id="summaryCorrectAnswers"></p>
+    <button onclick="resetGame()">Zagraj ponownie</button>
+  </div>
+
+  <script>
+    var score = {
+      totalQuestions: 0,
+      correctAnswers: 0
+    };
+    var gameDiv = document.getElementById('game');
+    var descriptionDiv = document.getElementById('description');
+    var namesDiv = document.getElementById('names');
+    var scoreDiv = document.getElementById('score');
+    var summaryDiv = document.getElementById('summary');
+    var summaryTotalQuestions = document.getElementById('summaryTotalQuestions');
+    var summaryCorrectAnswers = document.getElementById('summaryCorrectAnswers');
+
+    // Wykonaj żądanie GET do /randomObjects
+    function getRandomObjects() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://localhost:8081/randomObjects', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+          var result = data[0];
+
+          // Wyczyść poprzednie treści
+          descriptionDiv.innerHTML = '';
+          namesDiv.innerHTML = '';
+
+          // Wyświetl opis
+          var description = document.createElement('p');
+          description.textContent = result.about;
+          descriptionDiv.appendChild(description);
+
+          // Wygeneruj losową kolejność odpowiedzi
+          var shuffledNames = shuffleArray(data.map(function(record) {
+            return {
+              name: record.linkPhoto,
+              category: record.categoryName
+            };
+          }));
+
+          // Wyświetl odpowiedzi w losowej kolejności
+          shuffledNames.forEach(function(record) {
+            var nameButton = document.createElement('button');
+            var image = document.createElement('img');
+            var category = record.category;
+            image.src = 'sign/' + category + '/' + record.name;
+            image.classList.add('sign-image');
+            nameButton.appendChild(image);
+
+            if (category) {
+              var categoryLabel = document.createElement('p');
+              categoryLabel.classList.add('sign-category');
+              categoryLabel.textContent = category;
+              nameButton.appendChild(categoryLabel);
+            }
+
+            namesDiv.appendChild(nameButton);
+
+            nameButton.addEventListener('click', function() {
+              if (record.name === result.linkPhoto) {
+                score.correctAnswers++;
+                alert('Zgadłeś!');
+              } else {
+                alert('Niepoprawna odpowiedź!');
+              }
+
+              score.totalQuestions++;
+              updateScore();
+
+              if (score.totalQuestions === 5) {
+                showSummary();
+              } else {
+                getRandomObjects();
+              }
+            });
+          });
+        }
+      };
+      xhr.send();
+    }
+
+    // Funkcja do pobierania nazwy kategorii na podstawie identyfikatora
+    function getCategoryById(categoryId, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'http://localhost:8081/categoryById/' + categoryId, true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          var category = JSON.parse(xhr.responseText);
+          callback(null, category.name);
+        } else {
+          callback('Błąd serwera');
+        }
+      };
+      xhr.send();
+    }
+
+    // Funkcja do tasowania tablicy
+    function shuffleArray(array) {
+      var currentIndex = array.length;
+      var temporaryValue, randomIndex;
+
+      // Dopóki są elementy do zamiany
+      while (0 !== currentIndex) {
+        // Wylosuj pozycję
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // Zamień bieżący element z losowo wybranym elementem
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+    // Aktualizuj wynik
+    function updateScore() {
+      scoreDiv.textContent = 'Pytania: ' + score.totalQuestions + ' | Poprawne odpowiedzi: ' + score.correctAnswers;
+    }
+
+    // Wyświetl podsumowanie
+    function showSummary() {
+      summaryTotalQuestions.textContent = 'Liczba pytań: ' + score.totalQuestions;
+      summaryCorrectAnswers.textContent = 'Liczba poprawnych odpowiedzi: ' + score.correctAnswers;
+      gameDiv.style.display = 'none';
+      summaryDiv.style.display = 'block';
+    }
+
+    // Zresetuj grę
+    function resetGame() {
+      score.totalQuestions = 0;
+      score.correctAnswers = 0;
+      updateScore();
+      gameDiv.style.display = 'block';
+      summaryDiv.style.display = 'none';
+      getRandomObjects();
+    }
+
+    // Rozpocznij grę
+    getRandomObjects();
+    updateScore();
+  </script>
+</body>
+</html>
