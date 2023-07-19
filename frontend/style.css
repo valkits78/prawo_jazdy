@@ -135,6 +135,8 @@ h1 {
     height: 729px;
     display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap:wrap;
     background-color: white;
 }
 
@@ -437,26 +439,39 @@ h1 {
 /* nauka.html  */
 
 #oknaWybor {
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    align-items: flex-start;
     box-sizing: border-box;
-    /*float:left;*/
-    width: 896px;
+    width: 448px;
     height: 265px;
-    margin: 100px 200px 0 200px;
-
+    margin: 100px 50px 50px 150px;
     background-color: greenyellow;
 }
 
+#empty {
+    width: 448px;
+    height: 265px;
+    box-sizing: border-box;
+    margin: 100px 150px 50px 0;
+    background-color: darkorange;
+}
+
 #znaki {
+    /*order:3;*/
     width: 448px;
     height: 264px;
     background-color: chartreuse;
-    margin: 0 200px 100px 200px;
-    align-items: flex-end;
+    margin: 0 50px 100px 150px;
+    box-sizing: border-box;
+    /*display: flex;
+    align-items: flex-end;*/
+}
 
-
-
+#kodeksNauka {
+    /*order:4;*/
+    width: 448px;
+    height: 264px;
+    background-color: aqua;
+    margin: 0 150px 100px 0;
+    box-sizing: border-box;
+    /*display: flex;
+    align-items: flex-end;*/
 }
