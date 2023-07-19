@@ -66,6 +66,16 @@
         zoomOutButton.onclick = function() {
             document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) - 0.1;
         };
+
+        var screen = document.getElementById("screen");
+        var quiz = document.getElementById("quiz");
+        var znaki = document.getElementById("znaki");
+        
+        znaki.onclick = function() {
+            quiz.style.display = "block";
+            screen.style.display = "none";
+        };
+
     </script>
 </body>
 </html>
