@@ -30,6 +30,11 @@
   </style>
 </head>
 <body>
+  <h2>Wybierz ID kategorii (oddzielone przecinkami):</h2>
+  <input type="text" id="categoryIdsInput" placeholder="np. 1,2,3">
+  <button onclick="getRandomObjectsByCategoryIds()">Wyślij</button>
+  
+
   <div id="game">
     <h1> W znak do opisu:</h1>
     <div id="description"></div>
@@ -44,6 +49,26 @@
   </div>
 
   <script>
+    // Funkcja do pobierania nazwy kategorii na podstawie identyfikatora
+    function getCategoryById(categoryId) {
+      return new Promise(function(resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:8081/categoryById/' + categoryId, true);
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            var category = JSON.parse(xhr.responseText);
+            resolve(category.name);
+          } else {
+            reject('Błąd serwera');
+          }
+        };
+        xhr.onerror = function() {
+          reject('Błąd połączenia');
+        };
+        xhr.send();
+      });
+    }
+
     var score = {
       totalQuestions: 0,
       correctAnswers: 0
@@ -57,10 +82,19 @@
     var summaryCorrectAnswers = document.getElementById('summaryCorrectAnswers');
 
     // Wykonaj żądanie GET do /randomObjects
-    function getRandomObjects() {
+ async function getRandomObjectsByCategoryIds() {
+      var categoryIdsInput = document.getElementById('categoryIdsInput').value;
+      var categoryIds = categoryIdsInput.split(',').map(id => parseInt(id.trim()));
+
+      var url = 'http://localhost:8081/randomObjects';
+
+      if (categoryIds.length > 0) {
+        url += '?categoryIds=' + categoryIds.join(',');
+      }
+
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'http://localhost:8081/randomObjects', true);
-      xhr.onload = function() {
+      xhr.open('GET', url, true);
+      xhr.onload = async function() {
         if (xhr.status === 200) {
           var data = JSON.parse(xhr.responseText);
           var result = data[0];
@@ -75,20 +109,25 @@
           descriptionDiv.appendChild(description);
 
           // Wygeneruj losową kolejność odpowiedzi
-          var shuffledNames = shuffleArray(data.map(function(record) {
+          var shuffledNames = await Promise.all(data.map(async function(record) {
             return {
               name: record.linkPhoto,
-              category: record.categoryName
+              category: await getCategoryById(record.signCategoryId)
             };
           }));
+
+          // Tasowanie tablicy z odpowiedziami
+          shuffleArray(shuffledNames);
 
           // Wyświetl odpowiedzi w losowej kolejności
           shuffledNames.forEach(function(record) {
             var nameButton = document.createElement('button');
             var image = document.createElement('img');
             var category = record.category;
+
             image.src = 'sign/' + category + '/' + record.name;
             image.classList.add('sign-image');
+
             nameButton.appendChild(image);
 
             if (category) {
@@ -123,28 +162,13 @@
       xhr.send();
     }
 
-    // Funkcja do pobierania nazwy kategorii na podstawie identyfikatora
-    function getCategoryById(categoryId, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'http://localhost:8081/categoryById/' + categoryId, true);
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          var category = JSON.parse(xhr.responseText);
-          callback(null, category.name);
-        } else {
-          callback('Błąd serwera');
-        }
-      };
-      xhr.send();
-    }
-
-    // Funkcja do tasowania tablicy
+    // Funkcja do tasowania tablicy (Fisher-Yates Shuffle)
     function shuffleArray(array) {
       var currentIndex = array.length;
       var temporaryValue, randomIndex;
 
       // Dopóki są elementy do zamiany
-      while (0 !== currentIndex) {
+      while (currentIndex !== 0) {
         // Wylosuj pozycję
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
