@@ -351,6 +351,7 @@ h1 {
     width: 162px;
     height: 725px;
     border-radius: 20px;
+    margin-top: 1px;
     box-sizing: border-box;
 
 }
@@ -470,4 +471,43 @@ h1 {
     background-color: aqua;
     margin: 0 150px 100px 0;
     box-sizing: border-box;
+}
+
+#quiz {
+    width: 1296px;
+    height: 729px;
+    box-sizing: border-box;
+    display: none;
+    background-color: blueviolet;
+}
+
+#poprawneSymbol {
+    width: 548px;
+    height: 40px;
+    float:left;
+    background-color: bisque;
+    margin: 20px 0 0 100px;
+}
+
+#niepoprawneSymbol {
+    width: 548px;
+    height: 40px;
+    float:left;
+    background-color: darkkhaki;
+    margin: 20px 100px 0 0;
+}
+
+#pytanie {
+    width: 538px;
+    height: 569px;
+    margin: 50px 10px 50px 100px;
+    background-color: crimson;
+    float:left;
+}
+
+.answer {
+    width: 538px;
+    height: 150px;
+    background-color: blue;
+    float: left;
 }

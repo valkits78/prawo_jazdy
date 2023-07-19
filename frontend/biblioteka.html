@@ -72,14 +72,14 @@
         var bookbuttons = document.getElementsByClassName("bookbutton");
         for (var i = 0; i < bookbuttons.length; i++) {
             bookbuttons[i].onclick = function() {
-                book.style.display = "block";
+                book.style.display = "flex";
                 document.getElementById("screen").style.display = "none";
             };
         }
         var backToScreen = document.getElementById("backToScreen");
         backToScreen.onclick = function(){
             book.style.display = "none";
-            document.getElementById("screen").style.display = "block";
+            document.getElementById("screen").style.display = "flex";
 
         }
 
