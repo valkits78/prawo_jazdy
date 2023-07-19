@@ -132,9 +132,8 @@ h1 {
 #screen {
     width: 1296px;
     height: 729px;
-    background-image: url("./assets/city/menu1.png");
     float: left;
-    background-size: cover;
+    background-color: white;
 }
 
 #settings{
@@ -154,6 +153,8 @@ h1 {
     height: 50px;
     float: left;
     background-image: url("./assets/menu/money.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #val {
@@ -300,4 +301,109 @@ h1 {
 
 #salon:hover {
     background-color: yellow;
+}
+
+
+/* biblioteka.html */
+
+#ostrzegawcze {
+    background-color: lime;
+}
+
+#zakazu {
+    background-color: aqua;
+}
+
+#nakazu {
+    background-color: blue;
+}
+
+#informacyjne {
+    background-color: bisque;
+}
+
+#uzupelniajace {
+    background-color: blueviolet;
+}
+
+#poziome {
+    background-color: burlywood;
+}
+
+#swietlne {
+    background-color: coral;
+}
+
+#kodeks {
+    background-color: greenyellow;
+}
+
+.bookbutton{
+    width: 162px;
+    height: 725px;
+    border-radius: 20px;
+    float:left;
+}
+
+#book {
+    width: 1296px;
+    height: 729px;
+    float: left;
+    background-color: red;
+    display:none;
+}
+
+
+#leftArrow{
+    width: 150px;
+    height: 729px;
+    float: left;
+    background-color: black;
+}
+
+#info {
+    width: 996px;
+    height: 619px;
+    float: left;
+    background-color: blue;
+    margin: 30px 0 80px 0;
+}
+
+#rightArrow {
+    width: 150px;
+    height: 729px;
+    float: left;
+    background-color: black;
+}
+
+#photoInfo {
+    width: 300px;
+    height: 250px;
+    float:left;
+    background-color: aqua;
+    margin: 50px 0 0 50px;
+}
+
+#titleInfo {
+    width: 500px;
+    height: 200px;
+    float:left;
+    background-color: blueviolet;
+    margin: 70px 73px 30px 73px;
+}
+
+#aboutInfo {
+    float:left;
+    width: 896px;
+    height: 229px;
+    margin: 50px;
+    background-color: chartreuse;
+}
+
+#backToScreen {
+    width: 80px;
+    height: 50px;
+    background-color: darkorange;
+    float:left;
+    margin: 5px 458px 25px 458px ;
 }
