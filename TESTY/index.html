@@ -25,7 +25,6 @@
     <input type="submit" value="Dodaj użytkownika">
   </form>
 
-<<<<<<< HEAD
   <h1>Aktualna lista użytkowników:</h1>
   <ul id="user-list"></ul>
 <script>
@@ -68,16 +67,6 @@
         fetchUserList();
       });
     });
-=======
-  <script>
-    const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';  // CORS proxy service URL
-    const url = 'http://192.168.131.144:3000/listUsers';  // Target URL
-    
-    fetch(corsProxyUrl + url)
-      .then(res => res.text())
-      .then(text => console.log(text))
-      .catch(err => console.error(err));
->>>>>>> 1179834b0bdc85d0f0775ad606555c67a6a1af61
   </script>
 
 </body>

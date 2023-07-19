@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #square {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-image: url("car.png");
+      background-size: cover;
+    }
+    .falling-square {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-image: url("babolot.gif");
+      background-size: cover;
+    }
+    body {
+      background-image: url('street.png');
+      background-size: cover;
+      animation: scrollBackground 3s linear infinite;
+      overflow:hidden;
+    }
+    @keyframes scrollBackground {
+      0% {
+        background-position: 0 100%;
+      }
+      100% {
+        background-position: 0 0;
+      }
+    }
+    #points {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="square"></div>
+  <div id="points">Points: 0</div>
+
+  <script>
+    // Pobieranie referencji do elementu kwadratu
+    const square = document.getElementById('square');
+    // Inicjalizacja pozycji kwadratu
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight - 100;
+    square.style.top = y + 'px';
+    square.style.left = x + 'px';
+
+    let points = 0;
+    const pointsElement = document.getElementById('points');
+
+    // Funkcja obsługująca ruchy kwadratu
+    function moveSquare(direction) {
+      switch (direction) {
+        case 'left':
+          if (x > (window.innerWidth / 4) + 100) {
+            x -= 20;
+          }
+          break;
+        case 'right':
+          if (x < (window.innerWidth / 4) + 1 * 410) {
+            x += 20;
+          }
+          break;
+      }
+
+      // Ustawianie nowej pozycji kwadratu
+      square.style.top = y + 'px';
+      square.style.left = x + 'px';
+    }
+
+    // Obsługa naciśnięcia klawiszy
+    document.addEventListener('keydown', function(event) {
+      const key = event.key;
+      if (key === 'ArrowUp') {
+        moveSquare('up');
+      } else if (key === 'ArrowDown') {
+        moveSquare('down');
+      } else if (key === 'ArrowLeft') {
+        moveSquare('left');
+      } else if (key === 'ArrowRight') {
+        moveSquare('right');
+      }
+    });
+
+    function createFallingSquare() {
+      const square = document.createElement('div');
+      square.classList.add('falling-square');
+      document.body.appendChild(square);
+
+      let x = (window.innerWidth / 4) + Math.random() * 400 + 100;
+      let y = -50;
+      square.style.left = x + 'px';
+      function moveSquare() {
+        y += 10;
+        square.style.top = y + 'px';
+
+        // Sprawdzanie kolizji z poruszanym kwadratem
+        const playerRect = square.getBoundingClientRect();
+        const movingRect = document.getElementById('square').getBoundingClientRect();
+
+        if (
+          playerRect.left < movingRect.right &&
+          playerRect.right > movingRect.left &&
+          playerRect.top < movingRect.bottom &&
+          playerRect.bottom > movingRect.top
+        ) {
+          alert('Pamiętaj że zgodnie z prawem nie wolno potrącać staruszek');
+          points = 0;
+          location.reload();
+        }
+
+        if (y < window.innerHeight) {
+          requestAnimationFrame(moveSquare);
+        } else {
+          square.remove();
+          points += 1;
+          pointsElement.innerText = 'Points: ' + points;
+        }
+      }
+
+      moveSquare();
+    }
+
+    setInterval(createFallingSquare, 1000);
+  </script>
+  <noscript>
+    <p>I am really sorry, but your browser doesn't support javascript code! </p>
+  </noscript>
+</body>
+</html>

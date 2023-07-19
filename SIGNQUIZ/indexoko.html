@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dodaj użytkownika</title>
+  	<style>
+	#userList{
+	max-height:175px;
+	overflow: auto;
+	width:200px;
+	}
+	</style>
+</head>
+<body>
+  <h1>Dodaj użytkownika</h1>
+  <form action="http://localhost:8081/addUser" method="POST">
+    <label for="name">Imię:</label>
+    <input type="text" name="name" id="name" required><br>
+    <label for="password">Hasło:</label>
+    <input type="password" name="password" id="password" required><br>
+    <label for="profession">Zawód:</label>
+    <input type="text" name="profession" id="profession" required><br>
+    <input type="submit" value="Dodaj użytkownika">
+  </form>
+  
+  <h1>Lista użytkowników</h1>
+  <ul id="userList"></ul>
+
+<script>
+    // Pobierz dane z bazy danych przy użyciu żądania GET AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:8081/listUsers', true);
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var users = JSON.parse(xhr.responseText);
+
+        // Wygeneruj listę użytkowników
+        var userList = document.getElementById('userList');
+        users.forEach(function(user) {
+          var listItem = document.createElement('li');
+          listItem.textContent = user.name + ' - ' + user.profesion;
+          userList.appendChild(listItem);
+        });
+      }
+    };
+    xhr.send();
+  </script>
+</body>
+</html>
