@@ -133,6 +133,7 @@ h1 {
 #screen {
     width: 1296px;
     height: 729px;
+    box-sizing: border-box;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -350,6 +351,7 @@ h1 {
     width: 162px;
     height: 725px;
     border-radius: 20px;
+    box-sizing: border-box;
 
 }
 
