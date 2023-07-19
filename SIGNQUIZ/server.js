@@ -8,14 +8,30 @@ app.use(express.static(__dirname));
 
 const db = new sqlite3.Database('dl.db');
 
-function getRandomObjects(callback) {
-  db.all('SELECT * FROM sign ORDER BY RANDOM() LIMIT 3', function (err, rows) {
-    if (err) {
-      console.log(err);
-      return callback(err);
-    }
-    callback(null, rows);
-  });
+function getRandomObjects(categoryIds, callback) {
+  if (categoryIds && categoryIds.length > 0) {
+    // Wybierz jedną losową kategorię spośród przesłanych kategorii
+    const randomCategoryId = categoryIds[Math.floor(Math.random() * categoryIds.length)];
+
+    // Wybierz 3 losowe obiekty z wybranej kategorii
+    db.all('SELECT * FROM sign WHERE signCategoryId = ? ORDER BY RANDOM() LIMIT 3', randomCategoryId, function (err, rows) {
+      if (err) {
+        console.log(err);
+        return callback(err);
+      }
+      callback(null, rows);
+    });
+  } else {
+    // Jeśli nie przesłano categoryIds, wylosuj jedno wspólne signCategoryId, które będzie używane dla wszystkich losowanych obiektów
+    const signCategoryId = Math.floor(Math.random() * 5) + 1; // Losowanie ID kategorii od 1 do 5
+    db.all('SELECT * FROM sign WHERE signCategoryId = ? ORDER BY RANDOM() LIMIT 3', signCategoryId, function (err, rows) {
+      if (err) {
+        console.log(err);
+        return callback(err);
+      }
+      callback(null, rows);
+    });
+  }
 }
 
 function getCategoryById(categoryId, callback) {
@@ -39,14 +55,17 @@ app.get('/listSign', function (req, res) {
 });
 
 app.get('/randomObjects', function (req, res) {
-  getRandomObjects(function (err, objects) {
+  const categoryIds = req.query.categoryIds ? req.query.categoryIds.split(',').map(id => parseInt(id)) : null;
+
+  getRandomObjects(categoryIds, function (err, objects) {
     if (err) {
       return res.status(500).send('Błąd serwera');
     }
+
     // Przetwarzanie każdego obiektu, aby dodać nazwę kategorii
     let count = 0;
     objects.forEach(function (object) {
-      getCategoryById(object.categoryId, function (err, categoryName) {
+      getCategoryById(object.signCategoryId, function (err, categoryName) {
         if (err) {
           return res.status(500).send('Błąd serwera');
         }
@@ -61,7 +80,6 @@ app.get('/randomObjects', function (req, res) {
   });
 });
 
-
 app.get('/categoryById/:id', function(req, res) {
   const categoryId = req.params.id;
   getCategoryById(categoryId, function(err, categoryName) {
@@ -72,9 +90,6 @@ app.get('/categoryById/:id', function(req, res) {
     res.json({ name: categoryName });
   });
 });
-
-
-
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
