@@ -457,23 +457,17 @@ h1 {
 }
 
 #znaki {
-    /*order:3;*/
     width: 448px;
     height: 264px;
     background-color: chartreuse;
     margin: 0 50px 100px 150px;
     box-sizing: border-box;
-    /*display: flex;
-    align-items: flex-end;*/
 }
 
 #kodeksNauka {
-    /*order:4;*/
     width: 448px;
     height: 264px;
     background-color: aqua;
     margin: 0 150px 100px 0;
     box-sizing: border-box;
-    /*display: flex;
-    align-items: flex-end;*/
 }
