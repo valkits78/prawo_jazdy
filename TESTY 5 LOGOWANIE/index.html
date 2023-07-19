@@ -27,15 +27,16 @@
     }
 
     // Odczytanie wartości ciasteczka
-    const cookieValue = getCookieValue("name");
+    //const cookieValue = getCookieValue("name");
+    const cookieValue =document.cookie;
 
     // Wyświetlanie wartości ciasteczka na stronie
-    const cookieValueElement = document.getElementById('cookieValue');
-    if (cookieValue) {
-      cookieValueElement.textContent = cookieValue;
-    } else {
-      cookieValueElement.textContent = "Nie znaleziono ciasteczka.";
-    }
+    //const cookieValueElement = document.getElementById('cookieValue');
+    //if (cookieValue) {
+    //  cookieValueElement.textContent = cookieValue;
+    //} else {
+    //  cookieValueElement.textContent = "Nie znaleziono ciasteczka.";
+   // }
   </script>
 </body>
 </html>
