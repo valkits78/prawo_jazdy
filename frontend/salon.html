@@ -8,6 +8,9 @@
     <title>Salon</title>
 </head>
 <body>
+    <style>
+    
+    </style>
     <div class="body">
         <div id="money">
             <div id="moneyValue">
@@ -45,6 +48,26 @@
         zoomOutButton.onclick = function() {
             document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) - 0.1;
         };
+
+        var animacjaAuta = document.getElementById("animacjaAuta");
+  
+        // Pobieramy link do koloru auta dla zalogowanego użytkownika
+        fetch('/car-color')
+        .then(response => response.json())
+        .then(data => {
+            if (data.colorLink) {
+                console.log(data.colorLink);
+                // Jeśli link został pobrany, ustawiamy go jako tło animacji auta
+                animacjaAuta.style.backgroundImage = `url('${data.colorLink}')`;
+            } else {
+                // Możesz tutaj obsłużyć przypadek, gdy użytkownik nie ma przypisanego koloru auta
+                // Możesz ustawić domyślny kolor lub wyświetlić komunikat, że użytkownik powinien najpierw wybrać kolor auta
+            }
+        })
+        .catch(error => {
+            console.error('Błąd podczas pobierania linku do koloru auta:', error);
+            // Możesz obsłużyć błąd, np. wyświetlić komunikat dla użytkownika
+        });
     </script>
 </body>
 </html>
