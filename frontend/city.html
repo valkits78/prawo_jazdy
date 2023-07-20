@@ -40,10 +40,32 @@
     </div>
 
     <script>
-        var backDiv = document.getElementById("back");
-        backDiv.onclick = function() {
-            window.location.href = 'login.html';
-        };
+        function logout() {
+            fetch('/logout', { method: 'POST' }) // Wysłanie żądania POST do /logout na serwerze
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Błąd podczas wylogowywania.');
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'login.html'; // Przekierowanie na stronę logowania
+                    } else {
+                    throw new Error('Błąd podczas wylogowywania.');
+                }
+            })
+            .catch(error => {
+            console.error(error);
+      });
+  }
+  // Przypisanie obsługi kliknięcia dla przycisku "back"
+  var backDiv = document.getElementById("back");
+  backDiv.onclick = function() {
+    logout(); // Wywołanie funkcji logout() przy kliknięciu przycisku "back"
+  };
+
         var zoomInButton = document.getElementById("zoomIn");
         zoomInButton.onclick = function() {
             document.body.style.zoom = parseFloat(window.getComputedStyle(document.body).zoom) + 0.1;

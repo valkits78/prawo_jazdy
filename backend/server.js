@@ -27,18 +27,17 @@ app.use(session({
 
 // Middleware sprawdzające, czy użytkownik jest zalogowany
 function checkAuth(req, res, next) {
-    if (req.session.isLoggedIn) {
-      next();
-    } else {
-      res.redirect('/login');
-    }
+  if (req.session.isLoggedIn || req.url === '/register') {
+    next();
+  } else {
+    res.redirect('/login');
   }
+}
 
-// Strona logowania
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(staticDir, 'login.html'));
-  });
-
+  const loginPath = path.join(staticDir, 'login.html');
+  res.sendFile(loginPath);
+});
 // Obsługa logowania
 app.post('/login', (req, res) => {
   // Sprawdzenie danych logowania
@@ -63,13 +62,47 @@ app.post('/login', (req, res) => {
     }
   });
 });
-    
-   
-      
 
+app.get('/register', checkAuth, (req, res) => {
+  const registerPath = path.join(staticDir, '../frontend/register.html');
+  res.sendFile(registerPath);
+});
+app.post('/register', (req, res) => {
+  const username = req.body.login;
+  const password = req.body.password;
+
+  // Sprawdź, czy użytkownik o podanym loginie już istnieje w bazie danych
+  const checkUserQuery = 'SELECT * FROM user WHERE login = ?';
+  db.get(checkUserQuery, [username], (err, row) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    } else if (row) {
+      // Jeśli użytkownik o podanym loginie już istnieje, wyślij komunikat o błędzie
+      res.status(409).send('Użytkownik o podanym loginie już istnieje.');
+    } else {
+      // Jeśli użytkownik o podanym loginie nie istnieje, dodaj go do bazy danych
+      const insertUserQuery = 'INSERT INTO user (login, password, money, lvl) VALUES (?, ?, 0, 1)';
+      db.run(insertUserQuery, [username, password], (err) => {
+        if (err) {
+          console.error('Błąd przy dodawaniu użytkownika:', err.message);
+          res.status(500).send('Internal Server Error');
+        } else {
+          console.log(`Użytkownik ${username} został zarejestrowany.`);
+          res.redirect('/login'); // Możesz przekierować użytkownika na stronę logowania po zarejestrowaniu
+        }
+      });
+    }
+  });
+});
 
 app.get('/city', checkAuth, (req, res) => {
-    res.sendFile(path.join(staticDir, '../frontend/city.html'));
+  const cityPath = path.join(staticDir, '../frontend/city.html');
+  res.sendFile(cityPath);
+});
+app.post('/logout', (req, res) => {
+  req.session.isLoggedIn = false;
+  res.json({ success: true }); // Odpowiedź dla klienta, że wylogowanie zakończyło się sukcesem
 });
 
 
