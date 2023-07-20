@@ -473,7 +473,10 @@ h1 {
     box-sizing: border-box;
 }
 
-#quiz {
+/* nauka.html
+    quiz   */
+
+#quiz, #quizEnd {
     width: 1296px;
     height: 729px;
     box-sizing: border-box;
@@ -493,18 +496,30 @@ h1 {
 }
 
 #poprawneSymbol {
-    width: 548px;
+    width: 448px;
     height: 40px;
-    /*float:left;*/
     background-color: bisque;
-    /*margin: 20px 0 0 100px;*/
+    box-sizing: border-box;
+}
+
+#poprawne {
+    width: 100px;
+    height: 40px;
+    background-color: #1d2b53;
     box-sizing: border-box;
 }
 
 #niepoprawneSymbol {
-    width: 548px;
+    width: 100px;
     height: 40px;
     background-color: darkkhaki;
+    box-sizing: border-box;
+}
+
+#niepoprawne {
+    width: 448px;
+    height: 40px;
+    background-color: #1d2b53;
     box-sizing: border-box;
 }
 
@@ -522,14 +537,24 @@ h1 {
     background-color: blue;
     box-sizing: border-box;
     display: flex;
+    flex-wrap: wrap;
     align-content: space-around;
     margin: 50px 0 0 50px;
 }
 
 .answer {
     width: 498px;
-    height: 100px;
+    height: 130px;
     background-color: brown;
     box-sizing: border-box;
     display: flex;
+}
+ /* qiuzEnd  */
+
+#box {
+    width: 593px;
+    height: 737px;
+    box-sizing: border-box;
+    display: flex;
+    background-color: bisque;
 }
