@@ -30,12 +30,16 @@
             <div id="kodeksNauka"></div>            
         </div>
         <div id="quiz">
-            <div id="poprawneSymbol"></div><div id="poprawne"></div>
-            <div id="niepoprawneSymbol"></div><div id="niepoprawne"></div>
-            <div id="pytanie"></div>
-            <div id="odp1"></div>
-            <div id="odp2"></div>
-            <div id="odp3"></div>
+            <div id="boxQuiz">
+                <div id="poprawneSymbol"></div><div id="poprawne"></div>
+                <div id="niepoprawneSymbol"></div><div id="niepoprawne"></div>
+                <div id="pytanie"></div>
+                <div id="ans" >
+                    <div class="answer" id="odp1"></div>
+                    <div class="answer" id="odp2"></div>
+                    <div class="answer" id="odp3"></div>
+                </div>
+            </div>
         </div>
         <div id="quizEnd">
             <div id="box">
@@ -72,7 +76,7 @@
         var znaki = document.getElementById("znaki");
         
         znaki.onclick = function() {
-            quiz.style.display = "block";
+            quiz.style.display = "flex";
             screen.style.display = "none";
         };
 

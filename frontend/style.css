@@ -478,36 +478,58 @@ h1 {
     height: 729px;
     box-sizing: border-box;
     display: none;
+    /*flex-wrap:wrap;*/
     background-color: blueviolet;
+}
+
+#boxQuiz {
+    width: 1096px;
+    height: 639px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap:wrap;
+    background-color: darkorange;
+    margin: 20px 100px 50px 100px;
 }
 
 #poprawneSymbol {
     width: 548px;
     height: 40px;
-    float:left;
+    /*float:left;*/
     background-color: bisque;
-    margin: 20px 0 0 100px;
+    /*margin: 20px 0 0 100px;*/
+    box-sizing: border-box;
 }
 
 #niepoprawneSymbol {
     width: 548px;
     height: 40px;
-    float:left;
     background-color: darkkhaki;
-    margin: 20px 100px 0 0;
+    box-sizing: border-box;
 }
 
 #pytanie {
-    width: 538px;
-    height: 569px;
-    margin: 50px 10px 50px 100px;
+    width: 498px;
+    height: 549px;
+    margin: 50px 50px 0 0;
     background-color: crimson;
-    float:left;
+    box-sizing: border-box;
+}
+
+#ans {
+    width: 498px;
+    height: 549px;
+    background-color: blue;
+    box-sizing: border-box;
+    display: flex;
+    align-content: space-around;
+    margin: 50px 0 0 50px;
 }
 
 .answer {
-    width: 538px;
-    height: 150px;
-    background-color: blue;
-    float: left;
+    width: 498px;
+    height: 100px;
+    background-color: brown;
+    box-sizing: border-box;
+    display: flex;
 }
