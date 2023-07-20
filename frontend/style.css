@@ -473,8 +473,7 @@ h1 {
     box-sizing: border-box;
 }
 
-/* nauka.html
-    quiz   */
+/*  quiz   */
 
 #quiz, #quizEnd {
     width: 1296px;
@@ -548,13 +547,43 @@ h1 {
     background-color: brown;
     box-sizing: border-box;
     display: flex;
+    justify-content: center;
 }
  /* qiuzEnd  */
 
 #box {
     width: 593px;
-    height: 737px;
+    height: 619px;
     box-sizing: border-box;
     display: flex;
     background-color: bisque;
+    margin: 55px auto;
+    flex-flow: column wrap;
+}
+
+#gratulacjeNapis {
+    width: 503px;
+    height: 200px;
+    box-sizing: border-box;
+    display: flex;
+    background-color: crimson;
+    margin: 50px 45px 0 45px;
+}
+
+#podsumowanie {
+    width: 503px;
+    height: 150px;
+    box-sizing: border-box;
+    display: flex;
+    background-color: crimson;
+    margin: 43px 45px 0 45px;
+}
+
+#jeszczeRaz {
+    width: 503px;
+    height: 75px;
+    box-sizing: border-box;
+    display: flex;
+    background-color: crimson;
+    margin: 50px 45px;
 }
