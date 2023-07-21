@@ -10,7 +10,7 @@
 body {
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background-image: url("./assets/bckg.jpg");
+    background-image: url("./assets/menu/background51.png");
     background-repeat: repeat;
     background-size: auto;
     zoom:1;
@@ -29,7 +29,7 @@ body {
     border: 2px solid var(--border);
     margin: 0 auto;
     border-radius: 30px;
-    background-color: var(--primary-color);
+    background-color: rgba(212,217,219, 0.9);
 }
 
 h1 {
@@ -59,6 +59,36 @@ h1 {
     margin: 30px 70px;
     font-size: 21px;
 }
+
+.accept a{
+    text-decoration: none;
+    color: #065ab5;
+}
+
+.link {
+    width:225px;
+    height: 60px;
+    font-size: 23px;
+    box-sizing: border-box;
+    margin: 0 20px 20px 50px;
+    border-radius: 7px;
+    background-color: var(--button-color);
+    border: none;
+    box-shadow: 0 0 2px 2px var(--button-color);
+    transition: 0.2s;
+}
+
+.link a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.link:hover {
+    background-color: rgba(255,163,0, 1.0);
+    transition: 0.7s;
+    box-shadow: 0 0 4px 4px rgb(0,0,0);
+}
+
 
 .accept input[type="checkbox"] {
     display: inline-block;
@@ -475,12 +505,11 @@ h1 {
 
 /*  quiz   */
 
-#quiz, #quizEnd {
+#quiz, #quizEnd, #AllStatsInfo {
     width: 1296px;
     height: 729px;
     box-sizing: border-box;
     display: none;
-    /*flex-wrap:wrap;*/
     background-color: blueviolet;
 }
 
@@ -586,4 +615,97 @@ h1 {
     display: flex;
     background-color: crimson;
     margin: 50px 45px;
+}
+
+
+/* KIOSK.HTML */
+
+#babolotStats {
+    width: 548px;
+    height: 264px;
+    margin: 100px 0 0 100px;
+    box-sizing: border-box;
+    background-color: crimson;
+    border-top-left-radius: 20px;
+    cursor: pointer;
+}
+
+#babolotStats:hover {
+    transform: scale(0.95);
+    cursor: grab;
+}
+
+#holeRaceStats {
+    width: 548px;
+    height: 264px;
+    margin: 100px 100px 0 0;
+    box-sizing: border-box;
+    background-color: bisque;
+}
+
+#quizyStats {
+    width: 548px;
+    height: 264px;
+    margin: 0 0 101px 100px;
+    box-sizing: border-box;
+    background-color: bisque;
+}
+
+#XP {
+    width: 548px;
+    height: 264px;
+    margin: 0 100px 101px 0;
+    box-sizing: border-box;
+    background-color: crimson;
+    position: relative;
+}
+
+#lvl {
+    position: absolute;
+    width: 264px;
+    height: 264px;
+    box-sizing: border-box;
+    background-color: aqua;
+    margin: 232px 516px 233px 516px;
+    border-radius: 50%;
+}
+
+
+
+/* SALON.HTML */
+
+#animacjaAuta {
+    width: 896px;
+    height: 729px;
+    box-sizing: border-box;
+    background-color: chartreuse;
+}
+
+#koloryOpcje {
+    width: 400px;
+    height: 729px;
+    display:flex;
+    flex-direction: column;
+    background-color: brown;
+}
+
+#kolory {
+    width: 400px;
+    height: 479px;
+    box-sizing: border-box;
+    background-color: skyblue;
+}
+
+#resetUlepszen {
+    width: 400px;
+    height: 150px;
+    box-sizing: border-box;
+    background-color: cornsilk;
+}
+
+#zapiszNowyKolor {
+    width: 400px;
+    height: 100px;
+    box-sizing: border-box;
+    background-color: sandybrown;
 }
